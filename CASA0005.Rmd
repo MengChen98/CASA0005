@@ -1,0 +1,127 @@
+---
+title: "casa0005"
+author: "Meng Chen"
+output: word_document
+
+
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+#Descriptive analysis and MinMaxScaler
+install.packages("psych")
+install.packages(xlxs)
+> data <- read.xlsx("C:\\Users\\dell\\Desktop\\USA.xlsx")
+summary(data)
+library(psych)
+describe(data[vars])
+data.scale <- (data$score-min(data$score))/(max(data$score)-min(data$score))
+data.scale
+data.scale <- (max(data$score -data$score))/(max(data$score)-min(data$score))
+data.scale
+```
+
+# PCA
+
+```> library(openxlsx)
+> data1 <- read.xlsx("D:\\Users\\dell\\Desktop\\PCA.xlsx")
+> head(data1)
+Parallel analysis suggests that the number of factors =  NA  and the number of components =  1
+> head(data1)
+head(data1)
+fa.parallel(data1, fa = 'pc', n.iter = 100, show.legend = FALSE)
+Principal Components Analysis
+Call: principal(r = data1, nfactors = 2, rotate = "none")
+Standardized loadings (pattern matrix) based upon correlation matrix
+data1_pca
+> data1_pca
+data1_pca <- principal(data1, nfactors = 3, rotate = "none")
+data1_pca
+#Rotation component matrix
+data1_pca_xz <- principal(data1, nfactors = 2, rotate = "varimax")
+data1_pca_xz
+data1_pca_xz1 <- principal(data1, nfactors = 2, rotate = "varimax", scores = TRUE)
+options(digits = 2)
+head(data1_pca_xz1$scores)
+data1_pca_xz1$scores
+data1_pca_xz1$scores
+```
+# spatial autocorrelation analysis
+
+```data1 <- read.xlsx("D:\\Users\\dell\\Desktop\\score.xlsx")
+queen_nb <- poly2nb(data3, queen = TRUE)
+rook_nb <- poly2nb(data3, queen = FALSE)
+plot(queen_nb, coords, add = TRUE, pch = 19, cex = 0.5)
+plot(rook_nb, coords, add = TRUE, pch = 19, cex = 0.5)
+library(rgdal)
+shpt <- readOGR("states.shp")
+cdatashpt <- merge(shpt, cdata, by = "STATE_NAME")
+moran(cdatashpt$gdp2017,listw=score, =length(cdatashpt$gdp2017), S0=Szero(score))
+moran.plot(cdatashpt$gdp2017, zero.policy=NULL, spChk=NULL, labels=TRUE, xlab=NULL, ylab=NULL, quiet=NULL)
+localmoran(cdatashpt$gdp2017, alternative = "greater")
+install.packages("factoextra")
+```
+#cluster(Hierarchical clustering)
+install.packages("factoextra")
+library(factoextra)
+data1 <- read.xlsx("D:\\Users\\dell\\Desktop\\cluster1.xlsx")
+View(data3)
+fviz_nbclust(data3, kmeans, method = "wss") + geom_vline(xintercept = 4, linetype = 2)
+distance <- dist(data3)  
+data3.hc <- hclust(distance) 
+plot(china.hc, hang = -1) 
+re <- rect.hclust(data.hc, k = 4) 
+refor (i in 1:4) {  print(paste("",i,""))  print(score[re[[i]],]$state)}
+distance <- dist(data3)
+data3.hc <- hclust(distance) 
+plot(data3.hc, hang = -1)
+result <- dist(data3, method = "euclidean")
+result_hc <- hclust(d = result, method = "ward.D2")
+fviz_dend(result_hc, cex = 0.6)
+fviz_nbclust(data3, kmeans, method = "wss") + geom_vline(xintercept = 4, linetype = 2)
+km_result <- kmeans(data3, 4, nstart = 24)
+options(stringsAsFactors = TRUE)
+class(data3)
+data3.hc <- hclust(distance) 
+plot(data3.hc, hang = -1)
+plot(hc,hang=-1,labels=data3$Species[a])
+result <- dist(data3, method = "euclidean")
+as.character(data3)
+a=data3[,1]
+as.character(a)
+data3[,1]=a
+hc<-hclust(dist(data3),method = "ave")
+print(km_result)
+fviz_cluster(km_result, data = data3,
+palette = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07"),
+ellipse.type = "euclid",
+star.plot = TRUE,
+repel = TRUE,
+ggtheme = theme_minimal()
+)
+fviz_dend(result_hc, k = 4,
+cex = 0.5,
+k_colors = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07"),
+color_labels_by_k = TRUE,
+rect = TRUE
+)
+
+
+#regression analysis
+install.packages("gcookbook")
+library(gcookbook)
+data5=read.xlsx("C:\\Users\\dell\\Desktop\\USA.xlsx","Sheet1")
+View(data5)
+model <- lm(urbanization.rate~ci,data5)    
+model                                          
+summary(model)
+ggplot(data5, aes(x=ci, y=urbanization.rate,color="#5e616d"))+
+geom_point()+                                             
+stat_smooth(method = lm,color="blue")+                    
+annotate("text", label = "R^2==0.22")+   
+annotate("text", label = "y=91.72+-6.99x",x=4,y=85)
+
